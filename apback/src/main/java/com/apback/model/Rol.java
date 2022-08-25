@@ -1,10 +1,15 @@
 package com.apback.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.apback.enums.RolNombre;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,15 +21,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "habilidades")
-public class Habilidad {
+@Table(name = "roles")
+public class Rol {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private RolNombre rolNombre;
 
-	private String nombre;
-
-	private Integer nivel;
 	
 }

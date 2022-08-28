@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -32,5 +33,8 @@ public class Proyecto {
 	private String descripcion;
 
 	private String enlace;
+	
+	@ManyToOne
+	private Persona persona;
 	
 }

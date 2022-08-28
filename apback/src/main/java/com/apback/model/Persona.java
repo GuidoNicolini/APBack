@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,14 +28,19 @@ public class Persona {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@OneToOne
 	private DatosUsuario datosUsuario;
 
+	@OneToMany(mappedBy = "persona")
 	private List<Experiencia> experiencias;
 
+	@OneToMany(mappedBy = "persona")
 	private List<Estudio> estudios;
-
+	
+	@OneToMany(mappedBy = "persona")
 	private List<Habilidad> habilidades;
 
+	@OneToMany(mappedBy = "persona")
 	private List<Proyecto> proyectos;
 
 }

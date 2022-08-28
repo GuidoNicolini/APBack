@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -26,5 +27,8 @@ public class Habilidad {
 	private String nombre;
 
 	private Integer nivel;
+	
+	@ManyToOne
+	private Persona persona;
 	
 }

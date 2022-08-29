@@ -1,4 +1,4 @@
-package com.apback.model;
+package com.apback.security.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.apback.enums.RolNombre;
+import com.apback.security.enums.RolNombre;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,5 +32,9 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
 
+    
+    public Rol(@NotNull RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
+    }
 	
 }

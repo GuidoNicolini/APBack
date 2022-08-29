@@ -1,4 +1,4 @@
-package com.apback.model;
+package com.apback.security.entity;
 
 import java.util.Collection;
 import java.util.List;

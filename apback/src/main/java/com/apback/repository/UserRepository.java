@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apback.security.entity.Usuario;
 
 @Repository
-public interface UserRepository extends JpaRepository<Usuario, Long> {
+public interface UserRepository extends JpaRepository<Usuario, Integer> {
 
 }

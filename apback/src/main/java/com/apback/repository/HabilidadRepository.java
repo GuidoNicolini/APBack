@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apback.model.Habilidad;
 
 @Repository
-public interface HabilidadRepository extends JpaRepository<Habilidad, Long> {
+public interface HabilidadRepository extends JpaRepository<Habilidad, Integer> {
 
 }

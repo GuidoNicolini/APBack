@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apback.model.Persona;
 
 @Repository
-public interface PersonaRepository extends JpaRepository<Persona, Long> {
+public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 
 }

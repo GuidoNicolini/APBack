@@ -18,7 +18,7 @@ import com.apback.dto.response.PersonaRespuestaPublicaDto;
 import com.apback.repository.PersonaRepository;
 import com.apback.service.implementaciones.PersonaService;
 
-@RestController()
+@RestController
 @RequestMapping("/persona")
 public class PersonaController {
 

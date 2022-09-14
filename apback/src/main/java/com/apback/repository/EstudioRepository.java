@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apback.model.Estudio;
 
 @Repository
-public interface EstudioRepository extends JpaRepository<Estudio, Long>{
+public interface EstudioRepository extends JpaRepository<Estudio, Integer>{
 
 }

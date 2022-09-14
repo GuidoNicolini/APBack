@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apback.model.Experiencia;
 
 @Repository
-public interface ExperienciaRepository extends JpaRepository<Experiencia, Long> {
+public interface ExperienciaRepository extends JpaRepository<Experiencia, Integer> {
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apback.dto.response.PersonaRespuestaAdminDto;
 import com.apback.dto.response.PersonaRespuestaPublicaDto;
 import com.apback.repository.PersonaRepository;
-import com.apback.service.IPersonaService;
+import com.apback.service.interfaces.IPersonaService;
 
 @RestController
 @RequestMapping("/persona")

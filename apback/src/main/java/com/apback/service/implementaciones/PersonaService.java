@@ -14,7 +14,7 @@ import com.apback.model.DatosUsuario;
 import com.apback.model.Persona;
 import com.apback.repository.DatosUsuarioRepository;
 import com.apback.repository.PersonaRepository;
-import com.apback.service.IPersonaService;
+import com.apback.service.interfaces.IPersonaService;
 
 @Service
 public class PersonaService implements IPersonaService {

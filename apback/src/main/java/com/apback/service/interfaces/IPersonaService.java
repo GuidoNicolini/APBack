@@ -1,4 +1,4 @@
-package com.apback.service;
+package com.apback.service.interfaces;
 
 
 import java.util.List;

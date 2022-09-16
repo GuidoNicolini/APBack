@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.apback.dto.request.DatosUsuarioDto;
 import com.apback.repository.DatosUsuarioRepository;
-import com.apback.service.IDatosUsuarioService;
 import com.apback.service.implementaciones.DatosUsuarioService;
+import com.apback.service.interfaces.IDatosUsuarioService;
 
 @RestController
 @RequestMapping("/datos")
@@ -76,11 +76,12 @@ public class DatosUsuarioController {
 			return ResponseEntity.badRequest().body("No se han borrado los datos");
 		}
 	}
-	
+
 	@PatchMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,@PathVariable Integer id){
-		
+	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,
+			@PathVariable Integer id) {
+
 		try {
 			Boolean respuesta = datosUsuarioService.updateDatosUsuario(datosUsuarioDto, id);
 			if (respuesta) {

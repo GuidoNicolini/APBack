@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apback.dto.response.PersonaRespuestaAdminDto;
 import com.apback.dto.response.PersonaRespuestaPublicaDto;
 import com.apback.repository.PersonaRepository;
-import com.apback.service.implementaciones.PersonaService;
+import com.apback.service.IPersonaService;
 
 @RestController
 @RequestMapping("/persona")
 public class PersonaController {
 
 	@Autowired
-	private PersonaService personaService;
+	private IPersonaService personaService;
 
 	@Autowired
 	private PersonaRepository personaRepository;

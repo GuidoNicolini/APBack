@@ -3,7 +3,7 @@ package com.apback.service;
 import com.apback.dto.request.DatosUsuarioDto;
 import com.apback.model.DatosUsuario;
 
-public interface IDatosUsuario {
+public interface IDatosUsuarioService {
 
 	DatosUsuarioDto getDatosUsuario(Integer id);
 	Boolean createDatosUsuario(DatosUsuarioDto datosUsuarioDto);

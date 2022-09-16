@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.apback.dto.request.DatosUsuarioDto;
 import com.apback.repository.DatosUsuarioRepository;
+import com.apback.service.IDatosUsuarioService;
 import com.apback.service.implementaciones.DatosUsuarioService;
 
 @RestController
@@ -21,7 +22,7 @@ import com.apback.service.implementaciones.DatosUsuarioService;
 public class DatosUsuarioController {
 
 	@Autowired
-	private DatosUsuarioService datosUsuarioService;
+	private IDatosUsuarioService datosUsuarioService;
 
 	@Autowired
 	private DatosUsuarioRepository datosUsuarioRepository;

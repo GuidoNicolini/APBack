@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import com.apback.dto.request.DatosUsuarioDto;
 import com.apback.model.DatosUsuario;
 import com.apback.repository.DatosUsuarioRepository;
-import com.apback.service.IDatosUsuario;
+import com.apback.service.IDatosUsuarioService;
 
 @Service
-public class DatosUsuarioService implements IDatosUsuario {
+public class DatosUsuarioService implements IDatosUsuarioService {
 
 	@Autowired
 	private DatosUsuarioRepository datosUsuarioRepository;

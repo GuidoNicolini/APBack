@@ -79,8 +79,7 @@ public class DatosUsuarioController {
 
 	@PatchMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,
-			@PathVariable Integer id) {
+	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,@PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = datosUsuarioService.updateDatosUsuario(datosUsuarioDto, id);

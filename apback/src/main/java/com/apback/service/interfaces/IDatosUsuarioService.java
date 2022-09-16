@@ -1,4 +1,4 @@
-package com.apback.service;
+package com.apback.service.interfaces;
 
 import com.apback.dto.request.DatosUsuarioDto;
 import com.apback.model.DatosUsuario;

@@ -27,7 +27,7 @@ public class DatosUsuarioController {
 	@Autowired
 	private DatosUsuarioRepository datosUsuarioRepository;
 
-	@GetMapping
+	@GetMapping("/{id}")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<DatosUsuarioDto> getDatosUsuario(@PathVariable Integer id) {
 
@@ -60,7 +60,7 @@ public class DatosUsuarioController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteDatosUsuario(@PathVariable Integer id) {
 
@@ -77,7 +77,7 @@ public class DatosUsuarioController {
 		}
 	}
 
-	@PatchMapping
+	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,@PathVariable Integer id) {
 

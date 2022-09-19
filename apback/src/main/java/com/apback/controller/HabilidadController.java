@@ -26,7 +26,7 @@ public class HabilidadController {
 	@Autowired
 	private HabilidadRepository habilidadRepository;
 
-	@GetMapping
+	@GetMapping("/{id}")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<HabilidadDto> getHabilidad(@PathVariable Integer id) {
 
@@ -40,7 +40,7 @@ public class HabilidadController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteHabilidad(@PathVariable Integer id) {
 
@@ -57,7 +57,7 @@ public class HabilidadController {
 		}
 	}
 
-	@PatchMapping
+	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> updateHabilidad(@RequestBody HabilidadDto habilidadDto, @PathVariable Integer id) {
 

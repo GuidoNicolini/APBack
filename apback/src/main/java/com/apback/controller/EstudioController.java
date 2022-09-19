@@ -27,7 +27,7 @@ public class EstudioController {
 	@Autowired
 	private EstudioRepository estudioRepository;
 
-	@GetMapping
+	@GetMapping("/{id}")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<EstudioDto> getEstudio(@PathVariable Integer id) {
 
@@ -41,7 +41,7 @@ public class EstudioController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteEstudio(@PathVariable Integer id) {
 
@@ -58,7 +58,7 @@ public class EstudioController {
 		}
 	}
 
-	@PatchMapping
+	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> updateEstudio(@RequestBody EstudioDto estudioDto, @PathVariable Integer id) {
 

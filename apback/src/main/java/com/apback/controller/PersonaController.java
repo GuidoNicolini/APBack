@@ -28,7 +28,7 @@ public class PersonaController {
 	@Autowired
 	private PersonaRepository personaRepository;
 
-	@GetMapping
+	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<PersonaRespuestaAdminDto> getPersona(@PathVariable Integer id) {
 
@@ -60,7 +60,7 @@ public class PersonaController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deletePersona(@PathVariable Integer id) {
 

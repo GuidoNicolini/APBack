@@ -28,7 +28,7 @@ public class ExperienciaController {
 	@Autowired
 	private ExperienciaRepository experienciaRepository;
 
-	@GetMapping
+	@GetMapping("/{id}")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<ExperienciaDto> getExperiencia(@PathVariable Integer id) {
 
@@ -42,7 +42,7 @@ public class ExperienciaController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteExperiencia(@PathVariable Integer id) {
 
@@ -59,7 +59,7 @@ public class ExperienciaController {
 		}
 	}
 
-	@PatchMapping
+	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> updateExperiencia(@RequestBody ExperienciaDto experienciaDto,
 			@PathVariable Integer id) {

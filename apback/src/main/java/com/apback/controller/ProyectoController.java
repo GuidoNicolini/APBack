@@ -28,7 +28,7 @@ public class ProyectoController {
 	@Autowired
 	private ProyectoRepository proyectoRepository;
 
-	@GetMapping
+	@GetMapping("/{id}")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<ProyectoDto> getProyecto(@PathVariable Integer id) {
 
@@ -42,7 +42,7 @@ public class ProyectoController {
 		}
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteProyecto(@PathVariable Integer id) {
 
@@ -59,7 +59,7 @@ public class ProyectoController {
 		}
 	}
 
-	@PatchMapping
+	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> updateProyecto(@RequestBody ProyectoDto proyectoDto, @PathVariable Integer id) {
 

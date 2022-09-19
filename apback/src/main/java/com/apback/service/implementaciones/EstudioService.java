@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.apback.dto.request.EstudioDto;
 import com.apback.model.Estudio;
+import com.apback.model.Persona;
 import com.apback.repository.EstudioRepository;
+import com.apback.repository.PersonaRepository;
 import com.apback.service.interfaces.IEstudioService;
 
 @Service
@@ -16,6 +18,9 @@ public class EstudioService implements IEstudioService {
 
 	@Autowired
 	private EstudioRepository estudioRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -32,10 +37,15 @@ public class EstudioService implements IEstudioService {
 
 	@Override
 	@Transactional
-	public Boolean createEstudio(EstudioDto estudioDto) {
+	public Boolean createEstudio(EstudioDto estudioDto,Integer id) {
 
 		try {
 			Estudio estudio = modelMapper.map(estudioDto, Estudio.class);
+			
+			Persona persona = personaRepository.getReferenceById(id);
+			
+			estudio.setPersona(persona);
+			
 			estudioRepository.save(estudio);
 			return true;
 		} catch (Exception e) {
@@ -62,6 +72,7 @@ public class EstudioService implements IEstudioService {
 			if (estudioRepository.existsById(id)) {
 				Estudio estudio = modelMapper.map(estudioDto, Estudio.class);
 				estudio.setId(id);
+				estudio.setPersona(estudioRepository.getReferenceById(id).getPersona());
 				estudioRepository.save(estudio);
 				return true;
 			} else {

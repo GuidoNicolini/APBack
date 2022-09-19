@@ -6,7 +6,7 @@ public interface IProyectoService {
 
 	ProyectoDto getProyecto(Integer id);
 
-	Boolean createProyecto(ProyectoDto proyectoDto);
+	Boolean createProyecto(ProyectoDto proyectoDto,Integer id);
 
 	Boolean deleteProyecto(Integer id);
 

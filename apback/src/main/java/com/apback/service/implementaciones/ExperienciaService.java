@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.apback.dto.request.ExperienciaDto;
 
 import com.apback.model.Experiencia;
+import com.apback.model.Persona;
 import com.apback.repository.ExperienciaRepository;
+import com.apback.repository.PersonaRepository;
 import com.apback.service.interfaces.IExperienciaService;
 
 @Service
@@ -17,6 +19,9 @@ public class ExperienciaService implements IExperienciaService {
 
 	@Autowired
 	private ExperienciaRepository experienciaRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -32,10 +37,12 @@ public class ExperienciaService implements IExperienciaService {
 
 	@Override
 	@Transactional
-	public Boolean createExperiencia(ExperienciaDto experienciaDto) {
+	public Boolean createExperiencia(ExperienciaDto experienciaDto,Integer id) {
 
 		try {
 			Experiencia experiencia = modelMapper.map(experienciaDto, Experiencia.class);
+			Persona persona = personaRepository.getReferenceById(id);
+			experiencia.setPersona(persona);
 			experienciaRepository.save(experiencia);
 			return true;
 		} catch (Exception e) {
@@ -61,6 +68,7 @@ public class ExperienciaService implements IExperienciaService {
 			if (experienciaRepository.existsById(id)) {
 				Experiencia experiencia = modelMapper.map(experienciaDto, Experiencia.class);
 				experiencia.setId(id);
+				experiencia.setPersona(experienciaRepository.getReferenceById(id).getPersona());
 				experienciaRepository.save(experiencia);
 				return true;
 			} else {

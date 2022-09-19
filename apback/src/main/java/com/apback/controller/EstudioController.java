@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +62,7 @@ public class EstudioController {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateEstudio(@RequestBody EstudioDto estudioDto, @PathVariable Integer id) {
+	public ResponseEntity<String> updateEstudio(@Valid @RequestBody EstudioDto estudioDto, @PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = estudioService.updateEstudio(estudioDto, id);
@@ -76,12 +78,12 @@ public class EstudioController {
 
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createEstudio(@RequestBody EstudioDto estudioDto) {
+	public ResponseEntity<String> createEstudio(@Valid @RequestBody EstudioDto estudioDto, @PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = estudioService.createEstudio(estudioDto);
+			Boolean respuesta = estudioService.createEstudio(estudioDto,id);
 			if (respuesta) {
 				return new ResponseEntity<>("Estudio creado con exito", HttpStatus.CREATED);
 			} else {

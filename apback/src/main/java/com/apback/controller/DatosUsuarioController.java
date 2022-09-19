@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -75,7 +77,7 @@ public class DatosUsuarioController {
 	
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,
+	public ResponseEntity<String> updateDatosUsuario(@Valid @RequestBody DatosUsuarioDto datosUsuarioDto,
 			@PathVariable Integer id) {
 
 		try {

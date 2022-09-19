@@ -35,7 +35,7 @@ public class Estudio {
 	@Column(length = 300000)
 	private String descripcion;
 	
-	@ManyToOne
+	@ManyToOne()
 	private Persona persona;
 
 }

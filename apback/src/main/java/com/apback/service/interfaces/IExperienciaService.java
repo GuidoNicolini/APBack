@@ -6,7 +6,7 @@ public interface IExperienciaService {
 
 		
 	ExperienciaDto getExperiencia(Integer id);
-	Boolean createExperiencia(ExperienciaDto experienciaDto);
+	Boolean createExperiencia(ExperienciaDto experienciaDto,Integer id);
 	Boolean deleteExperiencia(Integer id);
 	Boolean updateExperiencia(ExperienciaDto experienciaDto,Integer id);
 }

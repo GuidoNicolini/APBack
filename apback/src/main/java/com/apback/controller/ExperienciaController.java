@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +63,7 @@ public class ExperienciaController {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateExperiencia(@RequestBody ExperienciaDto experienciaDto,
+	public ResponseEntity<String> updateExperiencia(@Valid @RequestBody ExperienciaDto experienciaDto,
 			@PathVariable Integer id) {
 
 		try {
@@ -78,12 +80,12 @@ public class ExperienciaController {
 
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createExperiencia(@RequestBody ExperienciaDto experienciaDto) {
+	public ResponseEntity<String> createExperiencia(@Valid @RequestBody ExperienciaDto experienciaDto, @PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = experienciaService.createExperiencia(experienciaDto);
+			Boolean respuesta = experienciaService.createExperiencia(experienciaDto,id);
 			if (respuesta) {
 				return new ResponseEntity<>("Experiencia creada con exito", HttpStatus.CREATED);
 			} else {

@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apback.dto.request.ProyectoDto;
-
+import com.apback.model.Persona;
 import com.apback.model.Proyecto;
+import com.apback.repository.PersonaRepository;
 import com.apback.repository.ProyectoRepository;
 import com.apback.service.interfaces.IProyectoService;
 
@@ -17,6 +18,9 @@ public class ProyectoService implements IProyectoService {
 
 	@Autowired
 	private ProyectoRepository proyectoRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -32,9 +36,11 @@ public class ProyectoService implements IProyectoService {
 
 	@Override
 	@Transactional
-	public Boolean createProyecto(ProyectoDto proyectoDto) {
+	public Boolean createProyecto(ProyectoDto proyectoDto,Integer id) {
 		try {
 			Proyecto proyecto = modelMapper.map(proyectoDto, Proyecto.class);
+			Persona persona = personaRepository.getReferenceById(id);
+			proyecto.setPersona(persona);
 			proyectoRepository.save(proyecto);
 			return true;
 		} catch (Exception e) {
@@ -60,6 +66,7 @@ public class ProyectoService implements IProyectoService {
 			if (proyectoRepository.existsById(id)) {
 				Proyecto proyecto = modelMapper.map(proyectoDto, Proyecto.class);
 				proyecto.setId(id);
+				proyecto.setPersona(proyectoRepository.getReferenceById(id).getPersona());
 				proyectoRepository.save(proyecto);
 				return true;
 			} else {

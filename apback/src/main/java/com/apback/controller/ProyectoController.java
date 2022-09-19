@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +63,7 @@ public class ProyectoController {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateProyecto(@RequestBody ProyectoDto proyectoDto, @PathVariable Integer id) {
+	public ResponseEntity<String> updateProyecto(@Valid @RequestBody ProyectoDto proyectoDto, @PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = proyectoService.updateProyecto(proyectoDto, id);
@@ -77,12 +79,12 @@ public class ProyectoController {
 
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createProyecto(@RequestBody ProyectoDto proyectoDto) {
+	public ResponseEntity<String> createProyecto(@Valid @RequestBody ProyectoDto proyectoDto, @PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = proyectoService.createProyecto(proyectoDto);
+			Boolean respuesta = proyectoService.createProyecto(proyectoDto,id);
 			if (respuesta) {
 				return new ResponseEntity<>("Proyecto creado con exito", HttpStatus.CREATED);
 			} else {

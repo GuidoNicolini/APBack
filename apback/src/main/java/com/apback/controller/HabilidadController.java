@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +61,7 @@ public class HabilidadController {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateHabilidad(@RequestBody HabilidadDto habilidadDto, @PathVariable Integer id) {
+	public ResponseEntity<String> updateHabilidad(@Valid @RequestBody HabilidadDto habilidadDto, @PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = habilidadService.updateHabilidad(habilidadDto, id);
@@ -75,12 +77,12 @@ public class HabilidadController {
 
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createHabilidad(@RequestBody HabilidadDto habilidadDto) {
+	public ResponseEntity<String> createHabilidad(@Valid @RequestBody HabilidadDto habilidadDto, @PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = habilidadService.createHabilidad(habilidadDto);
+			Boolean respuesta = habilidadService.createHabilidad(habilidadDto,id);
 			if (respuesta) {
 				return new ResponseEntity<>("Habilidad creada con exito", HttpStatus.CREATED);
 			} else {

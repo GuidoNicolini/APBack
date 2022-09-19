@@ -7,7 +7,7 @@ public interface IEstudioService {
 
 	
 	EstudioDto getEstudio(Integer id);
-	Boolean createEstudio(EstudioDto estudioDto);
+	Boolean createEstudio(EstudioDto estudioDto,Integer id);
 	Boolean deleteEstudio(Integer id);
 	Boolean updateEstudio(EstudioDto estudioDto,Integer id);
 	

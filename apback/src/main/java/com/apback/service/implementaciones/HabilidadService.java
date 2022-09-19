@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.apback.dto.request.HabilidadDto;
 import com.apback.model.Habilidad;
+import com.apback.model.Persona;
 import com.apback.repository.HabilidadRepository;
+import com.apback.repository.PersonaRepository;
 import com.apback.service.interfaces.IHabilidadService;
 
 @Service
@@ -16,6 +18,9 @@ public class HabilidadService implements IHabilidadService {
 
 	@Autowired
 	private HabilidadRepository habilidadRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -31,9 +36,11 @@ public class HabilidadService implements IHabilidadService {
 
 	@Override
 	@Transactional
-	public Boolean createHabilidad(HabilidadDto habilidadDto) {
+	public Boolean createHabilidad(HabilidadDto habilidadDto,Integer id) {
 		try {
 			Habilidad habilidad = modelMapper.map(habilidadDto, Habilidad.class);
+			Persona persona = personaRepository.getReferenceById(id);
+			habilidad.setPersona(persona);
 			habilidadRepository.save(habilidad);
 			return true;
 		} catch (Exception e) {
@@ -59,6 +66,7 @@ public class HabilidadService implements IHabilidadService {
 			if (habilidadRepository.existsById(id)) {
 				Habilidad habilidad = modelMapper.map(habilidadDto, Habilidad.class);
 				habilidad.setId(id);
+				habilidad.setPersona(habilidadRepository.getReferenceById(id).getPersona());
 				habilidadRepository.save(habilidad);
 				return true;
 			} else {

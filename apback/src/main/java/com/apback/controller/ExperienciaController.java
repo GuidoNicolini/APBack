@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +84,11 @@ public class ExperienciaController {
 
 	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createExperiencia(@Valid @RequestBody ExperienciaDto experienciaDto, @PathVariable Integer id) {
+	public ResponseEntity<String> createExperiencia(@Valid @RequestBody ExperienciaDto experienciaDto,
+			@PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = experienciaService.createExperiencia(experienciaDto,id);
+			Boolean respuesta = experienciaService.createExperiencia(experienciaDto, id);
 			if (respuesta) {
 				return new ResponseEntity<>("Experiencia creada con exito", HttpStatus.CREATED);
 			} else {
@@ -94,5 +97,14 @@ public class ExperienciaController {
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error en la creación de la Experiencia");
 		}
+	}
+
+	@GetMapping
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<ExperienciaDto>> getAllExperiencias() {
+
+		List<ExperienciaDto> experiencias = experienciaService.getAllExperiencias();
+
+		return ResponseEntity.ok(experiencias);
 	}
 }

@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apback.dto.request.HabilidadDto;
 import com.apback.dto.request.ProyectoDto;
 import com.apback.repository.ProyectoRepository;
 import com.apback.service.interfaces.IProyectoService;
@@ -23,7 +26,6 @@ import com.apback.service.interfaces.IProyectoService;
 @RequestMapping("/proyecto")
 public class ProyectoController {
 
-	
 	@Autowired
 	private IProyectoService proyectoService;
 
@@ -63,7 +65,8 @@ public class ProyectoController {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateProyecto(@Valid @RequestBody ProyectoDto proyectoDto, @PathVariable Integer id) {
+	public ResponseEntity<String> updateProyecto(@Valid @RequestBody ProyectoDto proyectoDto,
+			@PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = proyectoService.updateProyecto(proyectoDto, id);
@@ -81,10 +84,11 @@ public class ProyectoController {
 
 	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createProyecto(@Valid @RequestBody ProyectoDto proyectoDto, @PathVariable Integer id) {
+	public ResponseEntity<String> createProyecto(@Valid @RequestBody ProyectoDto proyectoDto,
+			@PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = proyectoService.createProyecto(proyectoDto,id);
+			Boolean respuesta = proyectoService.createProyecto(proyectoDto, id);
 			if (respuesta) {
 				return new ResponseEntity<>("Proyecto creado con exito", HttpStatus.CREATED);
 			} else {
@@ -93,5 +97,14 @@ public class ProyectoController {
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error en la creación del proyecto");
 		}
+	}
+
+	@GetMapping
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<ProyectoDto>> getAllProyectos() {
+
+		List<ProyectoDto> proyectos = proyectoService.getAllProyectos();
+
+		return ResponseEntity.ok(proyectos);
 	}
 }

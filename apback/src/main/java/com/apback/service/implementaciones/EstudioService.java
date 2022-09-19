@@ -1,5 +1,8 @@
 package com.apback.service.implementaciones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -18,7 +21,7 @@ public class EstudioService implements IEstudioService {
 
 	@Autowired
 	private EstudioRepository estudioRepository;
-	
+
 	@Autowired
 	private PersonaRepository personaRepository;
 
@@ -29,23 +32,23 @@ public class EstudioService implements IEstudioService {
 	public EstudioDto getEstudio(Integer id) {
 
 		Estudio estudio = estudioRepository.getReferenceById(id);
-		
+
 		EstudioDto estudioDto = modelMapper.map(estudio, EstudioDto.class);
-				
-		return estudioDto;		
+
+		return estudioDto;
 	}
 
 	@Override
 	@Transactional
-	public Boolean createEstudio(EstudioDto estudioDto,Integer id) {
+	public Boolean createEstudio(EstudioDto estudioDto, Integer id) {
 
 		try {
 			Estudio estudio = modelMapper.map(estudioDto, Estudio.class);
-			
+
 			Persona persona = personaRepository.getReferenceById(id);
-			
+
 			estudio.setPersona(persona);
-			
+
 			estudioRepository.save(estudio);
 			return true;
 		} catch (Exception e) {
@@ -81,6 +84,22 @@ public class EstudioService implements IEstudioService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public List<EstudioDto> getAllEstudios() {
+		List<Estudio> estudios = estudioRepository.findAll();
+
+		List<EstudioDto> estudiosDto = new ArrayList<>();
+
+		for (Estudio estudio : estudios) {
+
+			EstudioDto estudioDto = modelMapper.map(estudio, EstudioDto.class);
+
+			estudiosDto.add(estudioDto);
+		}
+
+		return estudiosDto;
 	}
 
 }

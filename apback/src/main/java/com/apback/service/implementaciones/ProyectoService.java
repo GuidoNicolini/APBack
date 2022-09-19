@@ -1,5 +1,8 @@
 package com.apback.service.implementaciones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -18,7 +21,7 @@ public class ProyectoService implements IProyectoService {
 
 	@Autowired
 	private ProyectoRepository proyectoRepository;
-	
+
 	@Autowired
 	private PersonaRepository personaRepository;
 
@@ -36,7 +39,7 @@ public class ProyectoService implements IProyectoService {
 
 	@Override
 	@Transactional
-	public Boolean createProyecto(ProyectoDto proyectoDto,Integer id) {
+	public Boolean createProyecto(ProyectoDto proyectoDto, Integer id) {
 		try {
 			Proyecto proyecto = modelMapper.map(proyectoDto, Proyecto.class);
 			Persona persona = personaRepository.getReferenceById(id);
@@ -75,6 +78,22 @@ public class ProyectoService implements IProyectoService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public List<ProyectoDto> getAllProyectos() {
+		List<Proyecto> proyectos = proyectoRepository.findAll();
+
+		List<ProyectoDto> proyectosDto = new ArrayList<>();
+
+		for (Proyecto proyecto : proyectos) {
+
+			ProyectoDto proyectoDto = modelMapper.map(proyecto, ProyectoDto.class);
+
+			proyectosDto.add(proyectoDto);
+		}
+
+		return proyectosDto;
 	}
 
 }

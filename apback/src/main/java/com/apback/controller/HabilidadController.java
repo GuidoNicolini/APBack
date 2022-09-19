@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,8 @@ public class HabilidadController {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateHabilidad(@Valid @RequestBody HabilidadDto habilidadDto, @PathVariable Integer id) {
+	public ResponseEntity<String> updateHabilidad(@Valid @RequestBody HabilidadDto habilidadDto,
+			@PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = habilidadService.updateHabilidad(habilidadDto, id);
@@ -79,10 +82,11 @@ public class HabilidadController {
 
 	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createHabilidad(@Valid @RequestBody HabilidadDto habilidadDto, @PathVariable Integer id) {
+	public ResponseEntity<String> createHabilidad(@Valid @RequestBody HabilidadDto habilidadDto,
+			@PathVariable Integer id) {
 
 		try {
-			Boolean respuesta = habilidadService.createHabilidad(habilidadDto,id);
+			Boolean respuesta = habilidadService.createHabilidad(habilidadDto, id);
 			if (respuesta) {
 				return new ResponseEntity<>("Habilidad creada con exito", HttpStatus.CREATED);
 			} else {
@@ -92,4 +96,13 @@ public class HabilidadController {
 			return ResponseEntity.badRequest().body("Error en la creación de la Habilidad");
 		}
 	}
+
+	@GetMapping
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<HabilidadDto>> getAllHabilidades() {
+
+		List<HabilidadDto> habilidades = habilidadService.getAllHabilidades();
+
+		return ResponseEntity.ok(habilidades);
+}
 }

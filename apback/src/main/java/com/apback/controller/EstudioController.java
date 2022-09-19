@@ -1,5 +1,7 @@
 package com.apback.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +94,14 @@ public class EstudioController {
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Error en la creación del Estudio");
 		}
+	}
+	
+	@GetMapping
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<EstudioDto>> getAllEstudios() {
+
+		List<EstudioDto> estudios = estudioService.getAllEstudios();
+		
+		return ResponseEntity.ok(estudios);
 	}
 }

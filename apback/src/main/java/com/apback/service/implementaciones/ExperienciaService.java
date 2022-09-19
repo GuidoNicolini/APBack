@@ -1,5 +1,8 @@
 package com.apback.service.implementaciones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -19,7 +22,7 @@ public class ExperienciaService implements IExperienciaService {
 
 	@Autowired
 	private ExperienciaRepository experienciaRepository;
-	
+
 	@Autowired
 	private PersonaRepository personaRepository;
 
@@ -37,7 +40,7 @@ public class ExperienciaService implements IExperienciaService {
 
 	@Override
 	@Transactional
-	public Boolean createExperiencia(ExperienciaDto experienciaDto,Integer id) {
+	public Boolean createExperiencia(ExperienciaDto experienciaDto, Integer id) {
 
 		try {
 			Experiencia experiencia = modelMapper.map(experienciaDto, Experiencia.class);
@@ -77,6 +80,22 @@ public class ExperienciaService implements IExperienciaService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public List<ExperienciaDto> getAllExperiencias() {
+		List<Experiencia> experiencias = experienciaRepository.findAll();
+
+		List<ExperienciaDto> experienciasDto = new ArrayList<>();
+
+		for (Experiencia experiencia : experiencias) {
+
+			ExperienciaDto experienciaDto = modelMapper.map(experiencia, ExperienciaDto.class);
+
+			experienciasDto.add(experienciaDto);
+		}
+
+		return experienciasDto;
 	}
 
 }

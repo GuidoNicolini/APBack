@@ -1,5 +1,8 @@
 package com.apback.service.implementaciones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -18,7 +21,7 @@ public class HabilidadService implements IHabilidadService {
 
 	@Autowired
 	private HabilidadRepository habilidadRepository;
-	
+
 	@Autowired
 	private PersonaRepository personaRepository;
 
@@ -36,7 +39,7 @@ public class HabilidadService implements IHabilidadService {
 
 	@Override
 	@Transactional
-	public Boolean createHabilidad(HabilidadDto habilidadDto,Integer id) {
+	public Boolean createHabilidad(HabilidadDto habilidadDto, Integer id) {
 		try {
 			Habilidad habilidad = modelMapper.map(habilidadDto, Habilidad.class);
 			Persona persona = personaRepository.getReferenceById(id);
@@ -62,7 +65,7 @@ public class HabilidadService implements IHabilidadService {
 	@Override
 	@Transactional
 	public Boolean updateHabilidad(HabilidadDto habilidadDto, Integer id) {
-				try {
+		try {
 			if (habilidadRepository.existsById(id)) {
 				Habilidad habilidad = modelMapper.map(habilidadDto, Habilidad.class);
 				habilidad.setId(id);
@@ -75,6 +78,22 @@ public class HabilidadService implements IHabilidadService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public List<HabilidadDto> getAllHabilidades() {
+		List<Habilidad> habilidades = habilidadRepository.findAll();
+
+		List<HabilidadDto> habilidadesDto = new ArrayList<>();
+
+		for (Habilidad habilidad : habilidades) {
+
+			HabilidadDto habilidadDto = modelMapper.map(habilidad, HabilidadDto.class);
+
+			habilidadesDto.add(habilidadDto);
+		}
+
+		return habilidadesDto;
 	}
 
 }

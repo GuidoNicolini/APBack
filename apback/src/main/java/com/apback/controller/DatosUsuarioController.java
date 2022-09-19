@@ -43,43 +43,40 @@ public class DatosUsuarioController {
 		}
 	}
 
-	@PutMapping
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> createDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto) {
+	/**
+	 * @PutMapping @PreAuthorize("hasRole('ROLE_ADMIN')") public
+	 *             ResponseEntity<String> createDatosUsuario(@RequestBody
+	 *             DatosUsuarioDto datosUsuarioDto) {
+	 * 
+	 *             try { Boolean respuesta =
+	 *             datosUsuarioService.createDatosUsuario(datosUsuarioDto); if
+	 *             (respuesta) {
+	 * 
+	 *             return ResponseEntity.ok("Datos cargados con exito"); } else {
+	 *             return ResponseEntity.badRequest().body("No se han cargado los
+	 *             datos"); } } catch (Exception e) { return
+	 *             ResponseEntity.badRequest().body("No se han cargado los datos");
+	 *             } }
+	 **/
 
-		try {
-			Boolean respuesta = datosUsuarioService.createDatosUsuario(datosUsuarioDto);
-			if (respuesta) {
-
-				return ResponseEntity.ok("Datos cargados con exito");
-			} else {
-				return ResponseEntity.badRequest().body("No se han cargado los datos");
-			}
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("No se han cargado los datos");
-		}
-	}
-
-	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> deleteDatosUsuario(@PathVariable Integer id) {
-
-		try {
-			Boolean respuesta = datosUsuarioService.deleteDatosUsuario(id);
-			if (respuesta) {
-
-				return ResponseEntity.ok("Datos borrados con exito");
-			} else {
-				return ResponseEntity.badRequest().body("No se han borrado los datos");
-			}
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("No se han borrado los datos");
-		}
-	}
-
+	/**
+	 * @DeleteMapping("/{id}") @PreAuthorize("hasRole('ROLE_ADMIN')") public
+	 * ResponseEntity<String> deleteDatosUsuario(@PathVariable Integer id) {
+	 * 
+	 * try { Boolean respuesta = datosUsuarioService.deleteDatosUsuario(id); if
+	 * (respuesta) {
+	 * 
+	 * return ResponseEntity.ok("Datos borrados con exito"); } else { return
+	 * ResponseEntity.badRequest().body("No se han borrado los datos"); } } catch
+	 * (Exception e) { return ResponseEntity.badRequest().body("No se han borrado
+	 * los datos"); } }
+	 * 
+	 **/
+	
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,@PathVariable Integer id) {
+	public ResponseEntity<String> updateDatosUsuario(@RequestBody DatosUsuarioDto datosUsuarioDto,
+			@PathVariable Integer id) {
 
 		try {
 			Boolean respuesta = datosUsuarioService.updateDatosUsuario(datosUsuarioDto, id);

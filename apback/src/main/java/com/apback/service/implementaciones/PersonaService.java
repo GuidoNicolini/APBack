@@ -21,6 +21,9 @@ public class PersonaService implements IPersonaService {
 
 	@Autowired
 	private PersonaRepository personaRepository;
+	
+	@Autowired
+	private DatosUsuarioRepository datosUsuarioRepository;
 
 	@Override
 	public PersonaRespuestaAdminDto getPersona(Integer id) {
@@ -42,9 +45,15 @@ public class PersonaService implements IPersonaService {
 	public Boolean createPersona() {
 
 		Persona persona = new Persona();
+		DatosUsuario datosUsuario = new DatosUsuario();
+		
+		persona.setDatosUsuario(datosUsuario);
 
 		try {
+			
+			
 			personaRepository.save(persona);
+			//datosUsuarioRepository.save(datosUsuario);
 			return true;
 		} catch (Exception e) {
 			return false;

@@ -99,11 +99,20 @@ public class ProyectoController {
 		}
 	}
 
-	@GetMapping
+	@GetMapping("/all")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<List<ProyectoDto>> getAllProyectos() {
 
 		List<ProyectoDto> proyectos = proyectoService.getAllProyectos();
+
+		return ResponseEntity.ok(proyectos);
+	}
+	
+	@GetMapping("/all/{id}")
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<ProyectoDto>> getAllProyectosByIdPersona(@PathVariable Integer id) {
+
+		List<ProyectoDto> proyectos = proyectoService.getAllProyectosByIdPersona(id);
 
 		return ResponseEntity.ok(proyectos);
 	}

@@ -98,4 +98,20 @@ public class ExperienciaService implements IExperienciaService {
 		return experienciasDto;
 	}
 
+	@Override
+	public List<ExperienciaDto> getAllExperienciasByIdPersona(Integer id) {
+		List<Experiencia> experiencias = experienciaRepository.findAllExperienciaByUsuarioId(id);
+
+		List<ExperienciaDto> experienciasDto = new ArrayList<>();
+
+		for (Experiencia experiencia : experiencias) {
+
+			ExperienciaDto experienciaDto = modelMapper.map(experiencia, ExperienciaDto.class);
+
+			experienciasDto.add(experienciaDto);
+		}
+
+		return experienciasDto;
+	}
+
 }

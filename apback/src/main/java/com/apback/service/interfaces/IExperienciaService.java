@@ -12,4 +12,5 @@ public interface IExperienciaService {
 	Boolean deleteExperiencia(Integer id);
 	Boolean updateExperiencia(ExperienciaDto experienciaDto,Integer id);
 	List<ExperienciaDto> getAllExperiencias();
+	List<ExperienciaDto> getAllExperienciasByIdPersona(Integer id);
 }

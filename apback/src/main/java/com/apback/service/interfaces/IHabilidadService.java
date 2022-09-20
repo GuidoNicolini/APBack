@@ -11,4 +11,5 @@ public interface IHabilidadService {
 	Boolean deleteHabilidad(Integer id);
 	Boolean updateHabilidad(HabilidadDto habilidadDto,Integer id);
 	List<HabilidadDto> getAllHabilidades();
+	List<HabilidadDto> getAllHabilidadesByIdPersona(Integer id);
 }

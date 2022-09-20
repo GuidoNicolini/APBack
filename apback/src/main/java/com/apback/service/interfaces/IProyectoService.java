@@ -15,5 +15,7 @@ public interface IProyectoService {
 	Boolean updateProyecto(ProyectoDto proyectoDto, Integer id);
 	
 	List<ProyectoDto> getAllProyectos();
+	
+	List<ProyectoDto> getAllProyectosByIdPersona(Integer id);
 
 }

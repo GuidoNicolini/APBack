@@ -99,11 +99,20 @@ public class ExperienciaController {
 		}
 	}
 
-	@GetMapping
+	@GetMapping("/all")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<List<ExperienciaDto>> getAllExperiencias() {
 
 		List<ExperienciaDto> experiencias = experienciaService.getAllExperiencias();
+
+		return ResponseEntity.ok(experiencias);
+	}
+	
+	@GetMapping("/all/{id}")
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<ExperienciaDto>> getAllExperienciasByIdPersona(@PathVariable Integer id) {
+
+		List<ExperienciaDto> experiencias = experienciaService.getAllExperienciasByIdPersona(id);
 
 		return ResponseEntity.ok(experiencias);
 	}

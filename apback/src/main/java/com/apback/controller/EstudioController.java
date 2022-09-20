@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apback.dto.request.EstudioDto;
@@ -96,7 +97,7 @@ public class EstudioController {
 		}
 	}
 	
-	@GetMapping
+	@GetMapping("/all")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<List<EstudioDto>> getAllEstudios() {
 
@@ -104,4 +105,14 @@ public class EstudioController {
 		
 		return ResponseEntity.ok(estudios);
 	}
+	
+	@GetMapping("/all/{id}")
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<EstudioDto>> getAllEstudiosByPersonaId(@PathVariable Integer id) {
+
+		List<EstudioDto> estudios = estudioService.getAllEstudiosByIdPersona(id);
+		
+		return ResponseEntity.ok(estudios);
+	}
+	
 }

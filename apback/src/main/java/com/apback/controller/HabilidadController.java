@@ -97,11 +97,19 @@ public class HabilidadController {
 		}
 	}
 
-	@GetMapping
+	@GetMapping("/all")
 	@PreAuthorize("permitAll()")
 	public ResponseEntity<List<HabilidadDto>> getAllHabilidades() {
 
 		List<HabilidadDto> habilidades = habilidadService.getAllHabilidades();
+
+		return ResponseEntity.ok(habilidades);
+}
+	@GetMapping("/all/{id}")
+	@PreAuthorize("permitAll()")
+	public ResponseEntity<List<HabilidadDto>> getAllHabilidadesByIdPersona(@PathVariable Integer id) {
+
+		List<HabilidadDto> habilidades = habilidadService.getAllHabilidadesByIdPersona(id);
 
 		return ResponseEntity.ok(habilidades);
 }

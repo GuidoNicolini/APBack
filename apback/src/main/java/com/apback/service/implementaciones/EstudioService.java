@@ -102,4 +102,20 @@ public class EstudioService implements IEstudioService {
 		return estudiosDto;
 	}
 
+	@Override
+	public List<EstudioDto> getAllEstudiosByIdPersona(Integer id) {
+		List<Estudio> estudios = estudioRepository.findAllEstudioByUsuarioId(id);
+
+		List<EstudioDto> estudiosDto = new ArrayList<>();
+
+		for (Estudio estudio : estudios) {
+
+			EstudioDto estudioDto = modelMapper.map(estudio, EstudioDto.class);
+
+			estudiosDto.add(estudioDto);
+		}
+
+		return estudiosDto;
+	}
+
 }

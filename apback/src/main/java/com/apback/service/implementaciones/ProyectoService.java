@@ -96,4 +96,20 @@ public class ProyectoService implements IProyectoService {
 		return proyectosDto;
 	}
 
+	@Override
+	public List<ProyectoDto> getAllProyectosByIdPersona(Integer id) {
+		List<Proyecto> proyectos = proyectoRepository.findAllProyectoByUsuarioId(id);
+
+		List<ProyectoDto> proyectosDto = new ArrayList<>();
+
+		for (Proyecto proyecto : proyectos) {
+
+			ProyectoDto proyectoDto = modelMapper.map(proyecto, ProyectoDto.class);
+
+			proyectosDto.add(proyectoDto);
+		}
+
+		return proyectosDto;
+	}
+
 }

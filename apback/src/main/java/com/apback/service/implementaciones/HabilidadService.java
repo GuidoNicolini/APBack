@@ -96,4 +96,20 @@ public class HabilidadService implements IHabilidadService {
 		return habilidadesDto;
 	}
 
+	@Override
+	public List<HabilidadDto> getAllHabilidadesByIdPersona(Integer id) {
+		List<Habilidad> habilidades = habilidadRepository.findAllHabilidadByUsuarioId(id);
+
+		List<HabilidadDto> habilidadesDto = new ArrayList<>();
+
+		for (Habilidad habilidad : habilidades) {
+
+			HabilidadDto habilidadDto = modelMapper.map(habilidad, HabilidadDto.class);
+
+			habilidadesDto.add(habilidadDto);
+		}
+
+		return habilidadesDto;
+	}
+
 }

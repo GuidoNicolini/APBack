@@ -13,5 +13,6 @@ public interface IEstudioService {
 	Boolean deleteEstudio(Integer id);
 	Boolean updateEstudio(EstudioDto estudioDto,Integer id);
 	List<EstudioDto> getAllEstudios();
+	List<EstudioDto> getAllEstudiosByIdPersona(Integer id);
 	
 }
